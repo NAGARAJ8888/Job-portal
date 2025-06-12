@@ -22,6 +22,12 @@ export const register = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 201, res, "User Registered Sucessfully !");
 });
 
+
+
+
+
+
+
 export const login = catchAsyncErrors(async (req, res, next) => {
   const { email, password, role } = req.body;
   if (!email || !password || !role) {
@@ -42,6 +48,10 @@ export const login = catchAsyncErrors(async (req, res, next) => {
   }
   sendToken(user, 201, res, "User Logged In Sucessfully !");
 });
+
+
+
+
 
 export const logout = catchAsyncErrors(async (req, res, next) => {
   res

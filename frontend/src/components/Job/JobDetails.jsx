@@ -3,7 +3,10 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+
+
 const JobDetails = () => {
+  
   const { id } = useParams();
   const [job, setJob] = useState({});
   const navigateTo = useNavigate();
