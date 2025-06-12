@@ -11,7 +11,11 @@ import fileUpload from "express-fileupload";
 import dotenv from "dotenv";
 dotenv.config({ path: "./config/config.env" });
 
+
 const app = express();
+
+// ✅ Log to verify .env value is loaded
+console.log("🚀 FRONTEND_URL from .env:", process.env.FRONTEND_URL);
 
 app.use(
   cors({
