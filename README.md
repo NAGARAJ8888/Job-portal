@@ -50,7 +50,7 @@ To run the project locally, follow these steps:
 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/your-username/job-portal-app.git
+git clone https://github.com/NAGARAJ8888/job-portal-app.git
 cd job-portal-app
 
 
