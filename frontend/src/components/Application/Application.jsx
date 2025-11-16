@@ -12,6 +12,7 @@ const Application = () => {
   const [resume, setResume] = useState(null);
 
   const { isAuthorized, user } = useContext(Context);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const navigateTo = useNavigate();
 
@@ -35,7 +36,7 @@ const Application = () => {
 
     try {
       const { data } = await axios.post(
-        "https://job-portal-backend-d000.onrender.com/api/v1/application/post",
+        `${API_BASE_URL}/api/v1/application/post`,
         formData,
         {
           withCredentials: true,
@@ -62,7 +63,7 @@ const Application = () => {
   }
 
   return (
-    <section className="application">
+    <section className="application page">
       <div className="container">
         <h3>Application Form</h3>
         <form onSubmit={handleApplication}>

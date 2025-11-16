@@ -10,6 +10,7 @@ const MyJobs = () => {
   const [myJobs, setMyJobs] = useState([]);
   const [editingMode, setEditingMode] = useState(null);
   const { isAuthorized, user } = useContext(Context);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const navigateTo = useNavigate();
   //Fetching all jobs
@@ -17,7 +18,7 @@ const MyJobs = () => {
     const fetchJobs = async () => {
       try {
         const { data } = await axios.get(
-          "https://job-portal-backend-d000.onrender.com/api/v1/job/getmyjobs",
+          `${API_BASE_URL}/api/v1/job/getmyjobs`,
           { withCredentials: true }
         );
         setMyJobs(data.myJobs);
@@ -47,7 +48,7 @@ const MyJobs = () => {
   const handleUpdateJob = async (jobId) => {
     const updatedJob = myJobs.find((job) => job._id === jobId);
     await axios
-      .put(`https://job-portal-backend-d000.onrender.com/api/v1/job/update/${jobId}`, updatedJob, {
+      .put(`${API_BASE_URL}/api/v1/job/update/${jobId}`, updatedJob, {
         withCredentials: true,
       })
       .then((res) => {
@@ -62,7 +63,7 @@ const MyJobs = () => {
   //Function For Deleting Job
   const handleDeleteJob = async (jobId) => {
     await axios
-      .delete(`https://job-portal-backend-d000.onrender.com/api/v1/job/delete/${jobId}`, {
+      .delete(`${API_BASE_URL}/api/v1/job/delete/${jobId}`, {
         withCredentials: true,
       })
       .then((res) => {

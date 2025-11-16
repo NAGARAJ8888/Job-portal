@@ -10,15 +10,16 @@ import { Context } from "../../main";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("Job Seeker");
 
   const { isAuthorized, setIsAuthorized } = useContext(Context);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "https://job-portal-backend-d000.onrender.com/api/v1/user/login",
+        `${API_BASE_URL}/api/v1/user/login`,
         { email, password, role },
         {
           headers: {
@@ -30,7 +31,7 @@ const Login = () => {
       toast.success(data.message);
       setEmail("");
       setPassword("");
-      setRole("");
+      setRole("Job Seeker");
       setIsAuthorized(true);
     } catch (error) {
       toast.error(error.response.data.message);
@@ -46,15 +47,13 @@ const Login = () => {
       <section className="authPage">
         <div className="container">
           <div className="header">
-            <img src="/daily-jobs-logo.png" alt="logo" />
+            <h2 className="brandTitle">Daily Jobs</h2>
             <h3>Login to your account</h3>
           </div>
           <form>
             <div className="inputTag">
               <div>
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
-                  <option value="">Login as</option>
-                  
                   <option value="Job Seeker">Job Seeker</option>
                   <option value="Employer">Employer</option>
                 </select>

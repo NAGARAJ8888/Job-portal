@@ -14,15 +14,16 @@ const Register = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("Job Seeker");
 
   const { isAuthorized, setIsAuthorized } = useContext(Context);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "https://job-portal-backend-d000.onrender.com/api/v1/user/register",
+        `${API_BASE_URL}/api/v1/user/register`,
         { name, phone, email, role, password },
         {
           headers: {
@@ -36,7 +37,7 @@ const Register = () => {
       setEmail("");
       setPassword("");
       setPhone("");
-      setRole("");
+      setRole("Job Seeker");
       setIsAuthorized(true);
     } catch (error) {
       toast.error(error.response.data.message);
@@ -53,16 +54,15 @@ const Register = () => {
       <section className="authPage">
         <div className="container">
           <div className="header">
-            <img src="/daily-jobs-logo.png" alt="logo" />
+            <h2 className="brandTitle">Daily Jobs</h2>
             <h3>Create a new account</h3>
           </div>
           <form>
             <div className="inputTag">
               <div>
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
-                  <option value="">Register As</option>
-                  <option value="Employer">Employer</option>
                   <option value="Job Seeker">Job Seeker</option>
+                  <option value="Employer">Employer</option>
                 </select>
                 <FaRegUser />
               </div>

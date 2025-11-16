@@ -12,13 +12,14 @@ const MyApplications = () => {
   const [resumeImageUrl, setResumeImageUrl] = useState("");
 
   const { isAuthorized } = useContext(Context);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const navigateTo = useNavigate();
 
   useEffect(() => {
     try {
       if (user && user.role === "Employer") {
         axios
-          .get("https://job-portal-backend-d000.onrender.com/api/v1/application/employer/getall", {
+          .get(`${API_BASE_URL}/api/v1/application/employer/getall`, {
             withCredentials: true,
           })
           .then((res) => {
@@ -26,7 +27,7 @@ const MyApplications = () => {
           });
       } else {
         axios
-          .get("https://job-portal-backend-d000.onrender.com/api/v1/application/jobseeker/getall", {
+          .get(`${API_BASE_URL}/api/v1/application/jobseeker/getall`, {
             withCredentials: true,
           })
           .then((res) => {
@@ -45,7 +46,7 @@ const MyApplications = () => {
   const deleteApplication = (id) => {
     try {
       axios
-        .delete(`https://job-portal-backend-d000.onrender.com/api/v1/application/delete/${id}`, {
+        .delete(`${API_BASE_URL}/api/v1/application/delete/${id}`, {
           withCredentials: true,
         })
         .then((res) => {

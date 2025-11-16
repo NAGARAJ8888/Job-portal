@@ -7,7 +7,8 @@ const HowItWorks = () => {
     <>
       <div className="howitworks">
         <div className="container">
-          <h3>How Career Connect Works !</h3>
+          <h3>How Career Connect Works</h3>
+          <p className="sectionSubtitle">Land your next role in three simple steps.</p>
           <div className="banner">
             <div className="card">
               <FaUserPlus />

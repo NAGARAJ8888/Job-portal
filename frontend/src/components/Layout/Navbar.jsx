@@ -10,15 +10,13 @@ const Navbar = () => {
   const [show, setShow] = useState(false);
   const { isAuthorized, setIsAuthorized, user } = useContext(Context);
   const navigateTo = useNavigate();
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get(
-        "https://job-portal-backend-d000.onrender.com/api/v1/user/logout",
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.get(`${API_BASE_URL}/api/v1/user/logout`, {
+        withCredentials: true,
+      });
       toast.success(response.data.message);
       setIsAuthorized(false);
       navigateTo("/login");
@@ -31,7 +29,9 @@ const Navbar = () => {
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
       <div className="container">
         <div className="logo">
-          Daily Jobs
+          <Link to={"/"} onClick={() => setShow(false)}>
+            Daily Jobs
+          </Link>
         </div>
         <ul className={!show ? "menu" : "show-menu menu"}>
           <li>

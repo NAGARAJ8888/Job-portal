@@ -16,6 +16,7 @@ const PostJob = () => {
   const [salaryType, setSalaryType] = useState("default");
 
   const { isAuthorized, user } = useContext(Context);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleJobPost = async (e) => {
     e.preventDefault();
@@ -31,7 +32,7 @@ const PostJob = () => {
     }
     await axios
       .post(
-        "https://job-portal-backend-d000.onrender.com/api/v1/job/post",
+        `${API_BASE_URL}/api/v1/job/post`,
         fixedSalary.length >= 4
           ? {
               title,
@@ -76,7 +77,10 @@ const PostJob = () => {
     <>
       <div className="job_post page">
         <div className="container">
-          <h3>POST NEW JOB</h3>
+          <div className="header">
+            <h3>Post a new job</h3>
+            <p className="subtitle">Reach top talent quickly with a clear and compelling listing.</p>
+          </div>
           <form onSubmit={handleJobPost}>
             <div className="wrapper">
               <input

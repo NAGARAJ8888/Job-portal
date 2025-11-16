@@ -4,18 +4,17 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
 
-
 const JobDetails = () => {
-  
   const { id } = useParams();
   const [job, setJob] = useState({});
   const navigateTo = useNavigate();
 
   const { isAuthorized, user } = useContext(Context);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     axios
-      .get(`https://job-portal-backend-d000.onrender.com/api/v1/job/${id}`, {
+      .get(`${API_BASE_URL}/api/v1/job/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
