@@ -4,25 +4,26 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../main";
 
 const Jobs = () => {
-  const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState({ jobs: [] });
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const { isAuthorized } = useContext(Context);
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const navigateTo = useNavigate();
   useEffect(() => {
-    try {
-      axios
-        .get(`${API_BASE_URL}/api/v1/job/getall`, {
+    const fetchJobs = async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/api/v1/job/getall`, {
           withCredentials: true,
-        })
-        .then((res) => {
-          setJobs(res.data);
         });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+        setJobs(res.data);
+      } catch (error) {
+        console.log(error);
+        setJobs({ jobs: [] });
+      }
+    };
+    fetchJobs();
+  }, [API_BASE_URL]);
   if (!isAuthorized) {
     navigateTo("/");
   }

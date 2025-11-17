@@ -1659,6 +1659,7 @@ nav {
   left: 0;
   width: 100%;
   z-index: 1000;
+  overflow: visible;
 }
 nav .container {
   max-width: 1200px;
@@ -1690,53 +1691,56 @@ nav .container .logo a {
   text-decoration: none;
   display: inline-block;
 }
-nav .menu {
-  display: flex;
-  gap: 25px;
-  align-items: center;
-}
-nav .menu button {
-  height: fit-content;
-  padding: 7px;
-  border: var(--border-1);
-  color: var(--color-text);
-  background: var(--color-card);
-  border-radius: 10px;
-  font-size: 20px;
-  font-weight: 300;
-}
-nav .menu button:hover {
-  color: #0b1020;
-  background: var(--color-primary);
-  border-color: transparent;
-  transition: all 0.3s;
-  cursor: pointer;
-  font-weight: 500;
-}
-nav .menu li a {
-  color: var(--color-text);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 17px;
-  position: relative;
-}
-nav .menu li a:hover {
-  color: var(--color-accent);
-  transition: all 0.3s;
-}
-nav .menu li a::before {
-  content: "";
-  position: absolute;
-  background: var(--color-accent);
-  height: 1px;
-  width: 100%;
-  left: -100%;
-  bottom: 0;
-  transition: all 0.3s;
-}
-nav .menu li a:hover::before {
-  transition: all 0.3s;
-  left: 0;
+/* Desktop menu styles - only apply above 1130px */
+@media (min-width: 1131px) {
+  nav .menu {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+  }
+  nav .menu button {
+    height: fit-content;
+    padding: 7px;
+    border: var(--border-1);
+    color: var(--color-text);
+    background: var(--color-card);
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 300;
+  }
+  nav .menu button:hover {
+    color: #0b1020;
+    background: var(--color-primary);
+    border-color: transparent;
+    transition: all 0.3s;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  nav .menu li a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 17px;
+    position: relative;
+  }
+  nav .menu li a:hover {
+    color: var(--color-accent);
+    transition: all 0.3s;
+  }
+  nav .menu li a::before {
+    content: "";
+    position: absolute;
+    background: var(--color-accent);
+    height: 1px;
+    width: 100%;
+    left: -100%;
+    bottom: 0;
+    transition: all 0.3s;
+  }
+  nav .menu li a:hover::before {
+    transition: all 0.3s;
+    left: 0;
+  }
 }
 nav .hamburger {
   display: none;
@@ -1755,66 +1759,148 @@ nav .hamburger {
     width: 100%;
     left: 0;
     top: 0;
-    z-index: 10;
+    z-index: 1000;
+    overflow: visible;
+  }
+  nav .container {
+    align-items: center;
+    position: relative;
+    overflow: visible;
   }
   nav .hamburger {
     display: block;
     font-size: 35px;
-    color: #f1f3f6;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+    z-index: 1002;
+    position: relative;
   }
-  nav .container {
-    align-items: center;
+  nav .hamburger:hover {
+    color: var(--color-accent);
+    transform: scale(1.1);
   }
-  .menu {
+  .menu-overlay {
     position: fixed;
-    top: 120px;
-    background: #f1f3f6;
-    left: -100%;
-    transition: all 0.3s;
-    width: 400px;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    gap: 30px;
-    align-items: flex-start;
-    padding-left: 25px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1001;
+    animation: fadeIn 0.3s ease;
   }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  /* Mobile menu styles - apply to both .menu and .show-menu */
+  nav .menu,
   nav .show-menu {
     position: fixed;
-    top: 120px;
-    background: #f1f3f6;
-    transition: all 0.3s;
-    left: 0;
-    width: 400px;
+    top: 0;
+    background: var(--color-card);
+    left: -100%;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 320px;
+    max-width: 85vw;
     flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    gap: 30px;
-    align-items: flex-start;
-    padding-left: 25px;
-    box-shadow: 9px 0px 16px 0px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: 9px 0px 16px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 9px 0px 16px 0px rgba(0, 0, 0, 0.75);
+    height: 100vh;
+    justify-content: flex-start;
+    gap: 0;
+    align-items: stretch;
+    padding: 80px 0 30px 0;
+    z-index: 1002;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+    border-right: var(--border-1);
+    overflow-y: auto;
+    margin: 0;
+    list-style: none;
+    display: flex;
   }
+  nav .show-menu {
+    left: 0;
+  }
+  /* Mobile menu list items */
+  nav .menu li,
+  nav .show-menu li {
+    width: 100%;
+    list-style: none;
+    border-bottom: var(--border-1);
+  }
+  nav .menu li:last-child,
+  nav .show-menu li:last-child {
+    border-bottom: none;
+    margin-top: 20px;
+    padding: 0 24px;
+  }
+  /* Mobile menu links */
+  nav .menu li a,
   nav .show-menu li a {
-    color: #184235;
+    color: var(--color-text);
     font-weight: 600;
+    font-size: 16px;
+    display: block;
+    padding: 18px 24px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
   }
+  nav .menu li a::before,
+  nav .show-menu li a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+  }
+  nav .menu li a:hover,
+  nav .show-menu li a:hover {
+    color: var(--color-accent);
+    background: rgba(124, 92, 255, 0.08);
+    padding-left: 28px;
+  }
+  nav .menu li a:hover::before,
+  nav .show-menu li a:hover::before {
+    transform: scaleY(1);
+  }
+  /* Mobile menu button */
+  nav .menu button,
   nav .show-menu button {
-    font-size: 18px;
-    font-weight: 600;
-    color: #67f5c8;
-    border: 1px solid #56d1aa;
-    font-weight: 600;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    border: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
   }
+  nav .menu button:hover,
   nav .show-menu button:hover {
-    background: #5b77ca;
-    color: #f1f3f6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(124, 92, 255, 0.4);
+    filter: brightness(1.1);
   }
 }
 @media (max-width: 490px) {
-  nav .menu {
+  nav .menu,
+  nav .show-menu {
     width: 100%;
+    max-width: 100vw;
   }
 }
 .notfound {

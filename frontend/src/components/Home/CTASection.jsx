@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CTASection = () => {
   return (
     <>
@@ -10,7 +12,7 @@ const CTASection = () => {
               Career Connect today.
             </p>
           </div>
-          <a className="btn primary" href="/jobs">Get Started</a>
+          <Link className="btn primary" to="/job/getall">Get Started</Link>
         </div>
       </section>
     </>
