@@ -12,7 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("Job Seeker");
 
-  const { isAuthorized, setIsAuthorized, isLoading } = useContext(Context);
+  const { isAuthorized, setIsAuthorized, isLoading, setUser } = useContext(Context);
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleLogin = async (e) => {
@@ -32,6 +32,7 @@ const Login = () => {
       setEmail("");
       setPassword("");
       setRole("Job Seeker");
+      setUser(data.user);
       setIsAuthorized(true);
     } catch (error) {
       toast.error(error.response.data.message);
