@@ -1,5 +1,5 @@
-import app from "./app.js";
 import cors from "cors";
+import app from "./app.js";
 import cloudinary from "cloudinary";
 
 app.use(cors({
