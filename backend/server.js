@@ -1,5 +1,6 @@
 import app from "./app.js";
 import cors from "cors";
+import cloudinary from "cloudinary";
 
 app.use(cors({
   origin: ["https://daily-job-portal.netlify.app"],
@@ -7,8 +8,7 @@ app.use(cors({
   allowedHeaders: "Content-Type, Authorization"
 }));
 
-
-import cloudinary from "cloudinary";
+app.options("*", cors());
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
