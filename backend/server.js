@@ -1,4 +1,12 @@
 import app from "./app.js";
+import cors from "cors";
+
+app.use(cors({
+  origin: ["https://daily-job-portal.netlify.app"],
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+  allowedHeaders: "Content-Type, Authorization"
+}));
+
 
 import cloudinary from "cloudinary";
 

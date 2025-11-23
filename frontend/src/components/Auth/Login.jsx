@@ -12,7 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("Job Seeker");
 
-  const { isAuthorized, setIsAuthorized } = useContext(Context);
+  const { isAuthorized, setIsAuthorized, isLoading } = useContext(Context);
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleLogin = async (e) => {
@@ -37,6 +37,20 @@ const Login = () => {
       toast.error(error.response.data.message);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        fontSize: '1.2rem'
+      }}>
+        Loading...
+      </div>
+    );
+  }
 
   if(isAuthorized){
     return <Navigate to={'/'}/>

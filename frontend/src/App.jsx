@@ -18,7 +18,7 @@ import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
 
 const App = () => {
-  const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
+  const { isAuthorized, setIsAuthorized, setUser, isLoading, setIsLoading } = useContext(Context);
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
@@ -34,12 +34,27 @@ const App = () => {
         setIsAuthorized(true);
       } catch (error) {
         setIsAuthorized(false);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchUser();
-  }, [isAuthorized]);
+  }, []);
 
   const ProtectedRoute = ({ children }) => {
+    if (isLoading) {
+      return (
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: '100vh',
+          fontSize: '1.2rem'
+        }}>
+          Loading...
+        </div>
+      );
+    }
     if (!isAuthorized) {
       return <Navigate to="/login" replace />;
     }
