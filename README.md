@@ -2,7 +2,7 @@
 
 ## 🚀 Live Demo
 
-👉 [Click here to view the live site](https://job-portal-frontend-lh44.onrender.com/)
+👉 [Click here to view the live site](https://daily-job-portal.netlify.app)
 
 A full-featured job portal web application built with the **MERN stack** (MongoDB, Express.js, React.js, Node.js). This platform enables job seekers and employers to connect, apply for opportunities, and manage applications with ease.
 
